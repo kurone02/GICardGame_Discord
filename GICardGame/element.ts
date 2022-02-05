@@ -2,15 +2,15 @@
     This file contains ultilities about the element mechanics.
 */
 
-const PYRO = 0;
-const HYDRO = 1;
-const ELECTRO = 2;
-const CRYO = 3;
-const ANEMO = 4;
-const GEO = 5;
-const PHYSICAL = 6;
+export const PYRO: number = 0;
+export const HYDRO: number = 1;
+export const ELECTRO: number = 2;
+export const CRYO: number = 3;
+export const ANEMO: number = 4;
+export const GEO: number = 5;
+export const PHYSICAL: number = 6;
 
-const TO_STRING = [
+export const TO_STRING: string[] = [
     "pyro",
     "hydro",
     "electro",
@@ -20,67 +20,42 @@ const TO_STRING = [
     "physical"
 ];
 
-const PYRO_TO_STRING = "pyro";
-const HYDRO_TO_STRING = "hydro";
-const ELECTRO_TO_STRING = "electro";
-const CRYO_TO_STRING = "cryo";
-const ANEMO_TO_STRING = "anemo";
-const GEO_TO_STRING = "geo";
-const PHYSICAL_TO_STRING = "physical";
+export const PYRO_TO_STRING: string = "pyro";
+export const HYDRO_TO_STRING: string = "hydro";
+export const ELECTRO_TO_STRING: string = "electro";
+export const CRYO_TO_STRING: string = "cryo";
+export const ANEMO_TO_STRING: string = "anemo";
+export const GEO_TO_STRING: string = "geo";
+export const PHYSICAL_TO_STRING: string = "physical";
 
-const MELT_MULTIPLIER = 2;
-const REVERSE_MELT_MULTIPLIER = 1.5;
-const VAPORIZE_MULTIPLIER = 2;
-const REVERSE_VAPORIZE_MULTIPLIER = 1.5;
-const OVERLOAD_DMG = 2;
-const ELECTRO_CHARGED_DMG = 2;
-const SUPERCONDUCT_DMG = 4;
-const SWIRL_DMG = 1;
+export const MELT_MULTIPLIER: number = 2;
+export const REVERSE_MELT_MULTIPLIER: number = 1.5;
+export const VAPORIZE_MULTIPLIER: number = 2;
+export const REVERSE_VAPORIZE_MULTIPLIER: number = 1.5;
+export const OVERLOAD_DMG: number = 2;
+export const ELECTRO_CHARGED_DMG: number = 2;
+export const SUPERCONDUCT_DMG: number = 4;
+export const SWIRL_DMG: number = 1;
 
 
-class Element{
+export class Element{
+    type: number;
+    duration: number;
+    to_string: string;
 
-    constructor(type, duration){
+    constructor(type: number, duration: number){
         this.type = type;
         this.duration = duration;
         this.to_string = TO_STRING[this.type];
     }
 }
 
-class Damage{
+export class Damage{
+    element: Element;
+    dmg: number;
 
-    constructor(ele, dmg){
+    constructor(ele: Element, dmg: number){
         this.element = ele;
         this.dmg = dmg;
     }
-}
-
-module.exports = {
-    PYRO: PYRO,
-    HYDRO: HYDRO,
-    ELECTRO: ELECTRO,
-    CRYO: CRYO,
-    ANEMO: ANEMO,
-    GEO: GEO,
-    PHYSICAL: PHYSICAL,
-
-    PYRO_TO_STRING: PYRO_TO_STRING,
-    HYDRO_TO_STRING: HYDRO_TO_STRING,
-    ELECTRO_TO_STRING: ELECTRO_TO_STRING,
-    CRYO_TO_STRING: CRYO_TO_STRING,
-    ANEMO_TO_STRING: ANEMO_TO_STRING,
-    GEO_TO_STRING: GEO_TO_STRING,
-    PHYSICAL_TO_STRING: PHYSICAL_TO_STRING,
-
-    MELT_MULTIPLIER: MELT_MULTIPLIER,
-    REVERSE_MELT_MULTIPLIER: REVERSE_MELT_MULTIPLIER,
-    VAPORIZE_MULTIPLIER: VAPORIZE_MULTIPLIER,
-    REVERSE_VAPORIZE_MULTIPLIER: REVERSE_VAPORIZE_MULTIPLIER,
-    OVERLOAD_DMG: OVERLOAD_DMG,
-    ELECTRO_CHARGED_DMG: ELECTRO_CHARGED_DMG,
-    SUPERCONDUCT_DMG: SUPERCONDUCT_DMG,
-    SWIRL_DMG: SWIRL_DMG,
-
-    Element: Element,
-    Damage: Damage
 }

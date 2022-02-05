@@ -2,9 +2,14 @@
     This file contains the class Player which has the player stats
 */
 
-const ultils = require("./ultils.js");
+import * as card from "./cards";
+import * as ultils from "./ultils";
 
-class Player{
+export class Player{
+    hp: number;
+    energy: number;
+    deck: card.Card[];
+    field : ultils.PlayerField;
     
     constructor(){
         this.hp = 100;
@@ -13,18 +18,16 @@ class Player{
         this.field = new ultils.PlayerField();
     }
 
-    current_hp = () => { return this.hp; }
+    public current_hp(): number { return this.hp; }
 
-    current_energy = () => { return this.energy; }
+    public current_energy(): number { return this.energy; }
 
-    get_deck = () => { return this.deck; }
+    public get_deck(): card.Card[] { return this.deck; }
 
-    current_field = () => { return this.field; }
+    current_field(): ultils.PlayerField { return this.field; }
 
-    is_dead = () => { return this.hp <= 0; }
+    is_dead(): boolean { return this.hp <= 0; }
 
-    take_dmg = (dmg) => { this.hp -= dmg; }
+    take_dmg(dmg: number): void { this.hp -= dmg; }
 
 }
-
-module.exports = Player

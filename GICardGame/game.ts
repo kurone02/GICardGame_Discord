@@ -3,27 +3,29 @@
 */
 
 
-const ultils = require("./ultils.js");
-const player = require("./player.js");
-const card_gen = require("./card_generator.js");
+import * as ultils from "./ultils";
+import * as player from "./player";
+import * as card_gen from "./card_generator";
 
-class Game{
+export class Game{
+    turn: number;
+    players: player.Player[];
 
     constructor(){
         // Current turn count
         this.turn = 0;
 
         // Two players in a game
-        this.players = [new player(), new player()];
+        this.players = [new player.Player(), new player.Player()];
         
 
     }
 
-    next_turn = () => { this.turn++; }
-
-    is_end = () => {
-        if(this.players[0].current_hp == 0) return 0;
-        if(this.players[1].current_hp == 0) return 1;
+    public next_turn(): void { this.turn++; }
+    
+    public is_end(): number {
+        if(this.players[0].current_hp() == 0) return 0;
+        if(this.players[1].current_hp() == 0) return 1;
         return -1;
     }
 

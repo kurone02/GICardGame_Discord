@@ -2,9 +2,20 @@
     This file contains classes relate to Cards object.
 */
 
+import * as element from "./element";
+import * as ultils from "./ultils";
+
 // General card object
-class Card{
-    constructor(dict){
+export abstract class Card{
+    id: any;
+    assets: string;
+    info: string
+    max_hp: number;
+    hp: number;
+    atk: number;
+    dmg_bonus: any;
+
+    constructor(dict: any){
         this.id = dict["id"];
         this.assets = dict["assets"];
         this.info = dict["info"];
@@ -26,8 +37,12 @@ class Card{
 
 
 // General skill class
-class Skill{
-    constructor(apply, cd){
+export class Skill{
+    apply: Function;
+    cd: number;
+    current_cd: number;
+
+    constructor(apply: Function, cd: number){
         this.apply = apply;
         this.cd = cd;
         this.current_cd = 0;
@@ -36,15 +51,21 @@ class Skill{
 
 
 // General Character object
-class Character extends Card{
-    constructor(dict){
+export class Character extends Card{
+    element: number;
+    skill: Function;
+    skill_cd: number;
+    element_applied: number | null;
+    elemental_skill: Skill;
+
+    constructor(dict: any){
         super(dict);
         this.element = dict["element"];
         this.skill = dict["skill"];
         this.skill_cd = dict["skill_cd"];
         this.element_applied = null;
         // General elemental skill
-        this.elemental_skill = new Skill((opponent_line) => {
+        this.elemental_skill = new Skill((opponent_line: ultils.PlayerField) => {
             this.skill(opponent_line, this);
         }, this.skill_cd)
     }
@@ -55,12 +76,15 @@ class Character extends Card{
 
 
 // Melee character object
-class MeleeCharacter extends Character{
-    constructor(dict){
+export class MeleeCharacter extends Character{
+    atk_CD: number;
+    attack: Skill;
+
+    constructor(dict: any){
         super(dict);
         this.atk_CD = 1;
         // General attack skill
-        this.attack = new Skill((target) => { 
+        this.attack = new Skill((target: Character) => { 
             let dmg = this.atk;
             target.hp -= dmg;
             return dmg;
@@ -71,12 +95,15 @@ class MeleeCharacter extends Character{
 
 
 // Ranged character object
-class RangedCharacter extends Character{
-    constructor(dict){
+export class RangedCharacter extends Character{
+    atk_CD: number;
+    attack: Skill;
+
+    constructor(dict: any){
         super(dict);
         this.atk_CD = 2;
         // General attack skill
-        this.attack =  new Skill((target) => {
+        this.attack =  new Skill((target: Character) => {
             let dmg = this.atk;
             target.hp -= dmg;
             target.element_applied = this.element;
@@ -85,11 +112,4 @@ class RangedCharacter extends Character{
     }
 
     
-}
-
-module.exports = {
-    Skill: Skill,
-    Character: Character,
-    MeleeCharacter: MeleeCharacter,
-    RangedCharacter: RangedCharacter
 }

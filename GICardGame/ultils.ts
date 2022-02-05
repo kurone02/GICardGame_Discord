@@ -3,28 +3,29 @@
     to make our life easier.
 */
 
-let get_random_integer = (min, max) => {
+import * as cards from "./cards";
+
+export let get_random_integer = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 
 // Instance of a card line of player's field
-class CardLine{
+export class CardLine{
+    line: (cards.Card | null)[]
+
     constructor(){
         this.line = [null, null, null, null];
     }
 }
 
 // Player's entire field
-class PlayerField{
+export class PlayerField{
+    front: CardLine;
+    back: CardLine;
+
     constructor(){
         this.front = new CardLine();
         this.back = new CardLine();
     }
-}
-
-module.exports = {
-    get_random_integer: get_random_integer,
-    CardLine: CardLine,
-    PlayerField: PlayerField
 }

@@ -3,9 +3,9 @@
 */
 
 
-const ultils = require("./ultils.js");
-const Card = require("./cards.js");
-const Element = require("./element.js");
+import * as ultils from "./ultils";
+import * as Element from "./element";
+import * as Card from "./cards";
 
 var id_counter = 1;
 
@@ -19,10 +19,10 @@ let card_list = [
         atk: 3,
         skill_cd: 3,
         skill_cost: 40,
-        skill: (opponent_line, this_char) => { // Skill's implementation
+        skill: (opponent_line: ultils.CardLine, this_char: Card.Character) => { // Skill's implementation
             let element_to_string = Element.TO_STRING[this_char.element];
             let dmg = this_char.atk * (1 + this_char.dmg_bonus[element_to_string])
-            opponent_line.forEach(opponent_char => {
+            opponent_line.line.forEach(opponent_char => {
                 if(opponent_char != null){
                     opponent_char.hp -= dmg;
                 }
