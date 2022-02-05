@@ -76,7 +76,7 @@ class RangedCharacter extends Character{
         super(dict);
         this.atk_CD = 2;
         // General attack skill
-        this.attack =  new Skill(() => {
+        this.attack =  new Skill((target) => {
             let dmg = this.atk;
             target.hp -= dmg;
             target.element_applied = this.element;
